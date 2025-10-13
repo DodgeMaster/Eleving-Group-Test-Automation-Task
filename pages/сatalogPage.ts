@@ -17,10 +17,13 @@ export class CatalogPage extends BasePage {
   readonly yearToLeftAmountOfVehicles: Locator;
   readonly listOfCarsOnThePage: Locator;
   readonly listOfCarsOnThePageInTextFormat: Locator;
+  readonly fuelTypeAutoCatalogList: Locator;
   readonly fuelTypeButton: Locator;
   readonly fuelTypeList: Locator;
   readonly gearboxButton: Locator;
   readonly gearboxTypeList: Locator;
+  readonly carDoesntExistError: Locator;
+  readonly listOfCarsReleaseYear: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -38,8 +41,11 @@ export class CatalogPage extends BasePage {
     this.yearToLeftAmountOfVehicles = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[3]/div/div/div/div[2]/div/div/div/div/div/div[3]/ul/li/span/span[2]');
     this.listOfCarsOnThePage = page.locator('//*[@id="vehicles-page-header"]/div/div/a');
     this.listOfCarsOnThePageInTextFormat = page.locator('//*[@id="vehicles-page-header"]/header/div[3]/span');
+    this.listOfCarsReleaseYear = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[2]/div[5]/div/div/a/div[2]/div[2]/div[1]');
+    this.fuelTypeAutoCatalogList = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[2]/div[5]/div/div/a/div[2]/div[2]/div[2]');
     this.fuelTypeButton = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[12]/div/button');
-    this.fuelTypeList = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[12]/div/div/ul/li');  
+    this.fuelTypeList = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[12]/div/div/ul/li/div/div[1]/label');  
+    this.carDoesntExistError = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[2]/div[5]/div/div/p');
     this.gearboxButton = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[11]/div/button');
     this.gearboxTypeList = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[11]/div/div/ul/li'); 
   }
@@ -73,10 +79,6 @@ export class CatalogPage extends BasePage {
     await this.yearToButton.click();
     await this.yearToDropdownMenu.getByText(year).scrollIntoViewIfNeeded();
     await this.yearToDropdownMenu.getByText(year).click();
-  }
-
-  async getAmountOfCarsOnThePageByText() {
-    return this.listOfCarsOnThePageInTextFormat.textContent(); //should be used for validation in cases where is cars on the page > 25
   }
   
   async getCountOfCarsOnThePageToString() {
