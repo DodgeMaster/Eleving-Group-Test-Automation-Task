@@ -1,0 +1,18 @@
+# deps
+node_modules/
+
+# reports & cache
+test-results/
+playwright-report/
+playwright/.cache/
+allure-results/
+allure-report/
+
+# env & secrets
+.env
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
