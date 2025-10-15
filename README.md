@@ -14,6 +14,9 @@ Setup project
 - run test suite: npx playwright test tests/catalog.spec.ts 
 - run test suite with an interface: npx playwright test tests/catalog.spec.ts --headed
 
+##Check test results
+- npx playwright show-report
+
 ## Additional documentation
 - Link for the test scenarious description: [Test Scenarious](https://docs.google.com/document/d/1b7jwyfzP-esHchhLkRfIah3AjfCev2DsdsS12GwiPK8/edit?usp=sharing)
 
