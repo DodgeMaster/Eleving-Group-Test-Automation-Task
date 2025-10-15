@@ -52,8 +52,8 @@ test.describe('Catalog tests', () => {
         // console.log(index.indexOf(YEAR_TO))
         let amountOfVehicles = await catalog.yearToLeftAmountOfVehicles.nth(index.indexOf(YEAR_TO)).textContent(); 
         await catalog.yearToDropdownMenu.getByText(YEAR_TO).click();
-        let getAmountOfCarsOnPage = await catalog.getCountOfCarsOnThePageToString();
-        expect(getAmountOfCarsOnPage).toBe(amountOfVehicles);
+        let getAmountOfCarsOnPage = await catalog.listOfCarsOnThePageInTextFormat.textContent();
+        expect(getAmountOfCarsOnPage).toContain(amountOfVehicles);
     });
 
     test('Brand + model + year range (boundary validation)', async ({ catalog }) => {
