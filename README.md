@@ -14,7 +14,7 @@ Setup project
 - run test suite: npx playwright test tests/catalog.spec.ts 
 - run test suite with an interface: npx playwright test tests/catalog.spec.ts --headed
 
-##Check test results
+## Check test results
 - npx playwright show-report
 
 ## Additional documentation
