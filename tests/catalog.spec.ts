@@ -47,16 +47,16 @@ test.describe('Catalog tests', () => {
         await catalog.setYearFrom(YEAR_FROM[1]);
         await catalog.yearToButton.click();
         await catalog.yearToDropdownMenu.getByText(YEAR_TO).scrollIntoViewIfNeeded();
-        await catalog.waitForListUpdate(catalog.yearToDropdownMenu);
-        let avaliableYears = await catalog.yearToDropdownMenu.allTextContents(); //get all avaliable years in the list
-        let index = avaliableYears.findIndex(avaliableYears => avaliableYears.includes(YEAR_TO)); //found that year that we want to click and save index
-        let amountOfVehicles = await catalog.yearToLeftAmountOfVehicles.nth(index).textContent(); //save amount of vehicles for future validation
+        await catalog.waitForListUpdate(await catalog.yearToDropdownMenu);
+        let index = await catalog.yearToDropdownMenu.allTextContents();
+        // console.log(index.indexOf(YEAR_TO))
+        let amountOfVehicles = await catalog.yearToLeftAmountOfVehicles.nth(index.indexOf(YEAR_TO)).textContent(); 
         await catalog.yearToDropdownMenu.getByText(YEAR_TO).click();
         let getAmountOfCarsOnPage = await catalog.getCountOfCarsOnThePageToString();
-        expect(getAmountOfCarsOnPage).toBe(amountOfVehicles); //validating that same amount of cars as well as in years to 
+        expect(getAmountOfCarsOnPage).toBe(amountOfVehicles);
     });
 
-       test('Brand + model + year range (boundary validation)', async ({ catalog }) => {
+    test('Brand + model + year range (boundary validation)', async ({ catalog }) => {
         await catalog.setBrand(BRAND_NAME);
         await catalog.setModel(MODEL);
         await catalog.setYearFrom(YEAR_FROM[1]);

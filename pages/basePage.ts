@@ -17,7 +17,7 @@ export class BasePage {
     async waitForListUpdate(
         locator: Locator,
         { 
-            timeout = 5000,
+            timeout = 10000,
             poll = 150 }: { 
             timeout?: number; 
             poll?: number

@@ -49,7 +49,7 @@ export class CatalogPage extends BasePage {
     this.yearFromButton = page.locator('//*[@id="select-year-from"]//*[@class="multiselect__tags"]').nth(0);
     this.yearToButton = page.locator('//*[@id="select-year-to"]//*[@class="multiselect__tags"]').nth(0);
     this.yearFromDropdownMenu = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[3]/div/div/div/div[1]/div/div/div/div/div/div[3]/ul/li');
-    this.yearToDropdownMenu = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[3]/div/div/div/div[2]/div/div/div/div/div/div[3]/ul/li');
+    this.yearToDropdownMenu = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[3]/div/div/div/div[2]/div/div/div/div/div/div[3]/ul/li/span/span[1]');
     this.yearToLeftAmountOfVehicles = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[3]/div/div/div/div[2]/div/div/div/div/div/div[3]/ul/li/span/span[2]');
     this.listOfCarsOnThePage = page.locator('//*[@id="vehicles-page-header"]/div/div/a');
     this.listOfCarsOnThePageInTextFormat = page.locator('//*[@id="vehicles-page-header"]/header/div[3]/span');
@@ -95,12 +95,14 @@ export class CatalogPage extends BasePage {
 
   async setYearFrom(year: string) {
     await this.yearFromButton.click();
+    await this.waitNetworkIdle();
     await this.yearFromDropdownMenu.getByText(year).scrollIntoViewIfNeeded();
     await this.yearFromDropdownMenu.getByText(year).click();
   }
 
   async setYearTo(year: string) {
     await this.yearToButton.click();
+    await this.waitNetworkIdle();
     await this.yearToDropdownMenu.getByText(year).scrollIntoViewIfNeeded();
     await this.yearToDropdownMenu.getByText(year).click();
   }
