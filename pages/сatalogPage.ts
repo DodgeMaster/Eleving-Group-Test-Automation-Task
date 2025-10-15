@@ -24,15 +24,27 @@ export class CatalogPage extends BasePage {
   readonly gearboxTypeList: Locator;
   readonly carDoesntExistError: Locator;
   readonly listOfCarsReleaseYear: Locator;
+  readonly listOfCarsGearboxType: Locator;
+  readonly listOfCarsModelType: Locator;
+  readonly currencyToggleLei: Locator;
+  readonly currencyToggleEuro: Locator;
+  readonly carPriceList: Locator;
+  readonly sortingOptionMenuButton: Locator;
+  readonly newestListings: Locator;
+  readonly oldestListings: Locator;
+  readonly higherPrices: Locator;
+  readonly lowerPrices: Locator;
+  readonly appliedFilters: Locator;
+  readonly carMoreDetails: Locator;
 
   constructor(page: Page) {
     super(page);
-    this.brandInput = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[1]/div/div[1]/input');
-    this.modelInput = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[2]/div/div/div[1]/input');
+    this.brandInput = page.locator('input[aria-controls="listbox-null"]').nth(0);
+    this.modelInput = page.locator('input[aria-controls="listbox-null"]').nth(1);
     this.brandResultList = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[1]/div/div[2]/ul/li/span/span[1]');
     this.modelResultList = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[2]/div/div/div[2]/ul/li');
-    this.nonExistedBrand = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[1]/div/div[2]/ul/li[1]');
-    this.nonExistedModel = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[2]/div/div/div[2]/ul/li[1]/span');
+    this.nonExistedBrand = page.locator('ul[aria-multiselectable="true"]').nth(0);
+    this.nonExistedModel = page.locator('ul[aria-multiselectable="true"]').nth(1);
     this.vehiclesCatalogNameList = page.locator('//*[@id="vehicles-page-header"]/div/div/a/div[2]/div[1]');
     this.yearFromButton = page.locator('//*[@id="select-year-from"]//*[@class="multiselect__tags"]').nth(0);
     this.yearToButton = page.locator('//*[@id="select-year-to"]//*[@class="multiselect__tags"]').nth(0);
@@ -46,8 +58,20 @@ export class CatalogPage extends BasePage {
     this.fuelTypeButton = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[12]/div/button');
     this.fuelTypeList = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[12]/div/div/ul/li/div/div[1]/label');  
     this.carDoesntExistError = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[2]/div[5]/div/div/p');
-    this.gearboxButton = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[11]/div/button');
-    this.gearboxTypeList = page.locator('//*[@id="__nuxt"]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[11]/div/div/ul/li'); 
+    this.gearboxButton = page.locator('button[aria-label="expand-filters"]');
+    this.gearboxTypeList = page.locator('label:has(input[name="filters-transmission"])');
+    this.listOfCarsGearboxType = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[2]/div[5]/div/div/a/div[2]/div[2]/div[4]');
+    this.listOfCarsModelType = page.locator('//html/body/div[2]/div/main/div[2]/div[1]/section/div/div/div[1]/div/ul/li[2]/div/div/div[2]/ul/li/span/span[2]');
+    this.currencyToggleLei = page.locator('div[class="flex items-center h-8 bg-white sorting-currencies"] > div').nth(0);
+    this.currencyToggleEuro = page.locator('div[class="flex items-center h-8 bg-white sorting-currencies"] > div').nth(1);
+    this.carPriceList = page.locator('div[class="text-high-dark text-h4"]');
+    this.sortingOptionMenuButton = page.locator('#vehicles-page-header > header > div.flex.items-center.w-full.gap-8 > div > ul > li:nth-child(1) > div > button > span')
+    this.newestListings = page.locator('ul[tabindex="-1"]> li > button').nth(4);
+    this.oldestListings = page.locator('ul[tabindex="-1"]> li > button').nth(5);
+    this.higherPrices = page.locator('ul[tabindex="-1"]> li > button').nth(6);
+    this.lowerPrices = page.locator('ul[tabindex="-1"]> li > button').nth(7);
+    this.appliedFilters = page.locator('//html/body/div[1]/div/main/div[2]/div[1]/section/div/div/div[1]/div/div[2]/div/button');
+    this.carMoreDetails = page.locator('//*[@id="vehicles-page-header"]/div/div/a/div[2]/button');
   }
 
   async goto() {
@@ -86,4 +110,11 @@ export class CatalogPage extends BasePage {
     return (await this.listOfCarsOnThePage.count()).toString(); //should be used in regular validation for the cars on the page < 25
   } 
 
+  async rebootPage() {
+    await this.page.reload();
+  }
+
+  async getCurrentPage() {
+    return this.page.url();
+  }
 }
