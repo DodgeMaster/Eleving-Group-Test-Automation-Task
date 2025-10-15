@@ -1,10 +1,13 @@
 # Eleving-Group-Test-Automation-Task
 
-Setup project 
+Requirements:
+Node.js - v18+
+npm - v8+
 
-- npm i -D @playwright/test typescript dotenv cross-env allure-playwright allure-commandline
-- npm i -D @types/node
-- npx playwright install
+P.S On my machine npm 10.9.2, node v22.14.0
+
+Setup project 
+- npm run setup
 
 ## How execute tests?
 - debug: npx playwright test tests/catalog.spec.ts --debug

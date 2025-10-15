@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "npm i -D @playwright/test typescript dotenv cross-env allure-playwright allure-commandline @types/node && npx playwright install"
   },
   "repository": {
     "type": "git",
